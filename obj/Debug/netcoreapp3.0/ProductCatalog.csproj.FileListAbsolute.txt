@@ -22,5 +22,3 @@ C:\Users\asari\source\repos\ProductCatalog\bin\Debug\netcoreapp3.0\Swashbuckle.A
 C:\Users\asari\source\repos\ProductCatalog\obj\Debug\netcoreapp3.0\ProductCatalog.csproj.CopyComplete
 C:\Users\asari\source\repos\ProductCatalog\bin\Debug\netcoreapp3.0\DocumentFormat.OpenXml.dll
 C:\Users\asari\source\repos\ProductCatalog\bin\Debug\netcoreapp3.0\System.IO.Packaging.dll
-C:\Users\asari\source\repos\ProductCatalog\obj\Debug\netcoreapp3.0\ProductCatalog.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\asari\source\repos\ProductCatalog\obj\Debug\netcoreapp3.0\ProductCatalog.MvcApplicationPartsAssemblyInfo.cache
