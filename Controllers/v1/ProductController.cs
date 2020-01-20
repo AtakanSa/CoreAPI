@@ -24,12 +24,12 @@ namespace ProductCatalog.Controllers.v1
         [HttpGet(ApiRoutes.Posts.GetAll)]
         public IActionResult GetAll()
         {
-            return Ok(_postService.GetPosts());
+            return Ok(_postService.GetProducts());
         }
         [HttpDelete(ApiRoutes.Posts.Delete)]
         public IActionResult Delete([FromRoute]Guid postId)
         {
-            var deleted = _postService.DeletePost(postId);
+            var deleted = _postService.DeleteProduct(postId);
 
             if (deleted)
                 return NoContent();
@@ -40,7 +40,7 @@ namespace ProductCatalog.Controllers.v1
         [HttpGet(ApiRoutes.Posts.Get)]
         public IActionResult Get([FromRoute]Guid postId)
         {
-            var post = _postService.GetPostById(postId);
+            var post = _postService.GetProductById(postId);
 
             if (post == null)
                 return NotFound();
@@ -56,7 +56,7 @@ namespace ProductCatalog.Controllers.v1
                 Name = request.Name
             };
 
-            var updated = _postService.UpdatePost(post);
+            var updated = _postService.UpdateProduct(post);
 
             if (updated)
                 return Ok(post);
@@ -97,9 +97,10 @@ namespace ProductCatalog.Controllers.v1
             else
             {
                 pictureUrl = postRequest.Picture;
+                if (!Uri.IsWellFormedUriString(postRequest.Picture, UriKind.RelativeOrAbsolute))
+                    return BadRequest(new { error = "Picture URL is not well Formatted !" });
             }
-            if (!Uri.IsWellFormedUriString(postRequest.Picture, UriKind.RelativeOrAbsolute))
-                return BadRequest(new { error = "Picture URL is not well Formatted !" });
+            
 
             var product = new Product
             {
@@ -112,7 +113,7 @@ namespace ProductCatalog.Controllers.v1
             };
 
 
-            _postService.GetPosts().Add(product);
+            _postService.GetProducts().Add(product);
 
             var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
             var locationUrl = baseUrl + "/" + ApiRoutes.Posts.Get.Replace("{postId}", product.Id.ToString());

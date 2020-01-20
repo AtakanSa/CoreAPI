@@ -26,20 +26,20 @@ namespace ProductCatalog.Service
 
             }
         }
-        public List<Product> GetPosts()
+        public List<Product> GetProducts()
         {
             return _posts;
 
         }
-        public Product GetPostById(Guid postId)
+        public Product GetProductById(Guid postId)
         {
             
             return _posts.SingleOrDefault(x => x.Id == postId);
         }
 
-        public bool UpdatePost(Product postToUpdate)
+        public bool UpdateProduct(Product postToUpdate)
         {
-            var exists = GetPostById(postToUpdate.Id) != null;
+            var exists = GetProductById(postToUpdate.Id) != null;
 
             if (!exists)
                 return false;
@@ -49,9 +49,9 @@ namespace ProductCatalog.Service
             return true;
         }
 
-        public bool DeletePost(Guid postId)
+        public bool DeleteProduct(Guid postId)
         {
-            var post = GetPostById(postId);
+            var post = GetProductById(postId);
 
             if (post == null)
                 return false;

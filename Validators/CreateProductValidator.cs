@@ -27,12 +27,14 @@ namespace ProductCatalog.Validators
 
             RuleFor(x => x.Name)
                 .NotEmpty().WithMessage("Name To must be after Date From");
-            
+
             RuleFor(x => x.Price)
                 .GreaterThan(0)
                 .LessThan(1000)
-                .NotEmpty();
-            
+                .NotEmpty()
+                .WithMessage("Price must be correct format");
+
+
 
         }
     }

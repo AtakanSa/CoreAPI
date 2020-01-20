@@ -13,7 +13,7 @@ namespace ProductCatalog.Contract.v1
 
         public const string Base = Root + "/" + Version;
 
-
+        
         public class Posts { 
 
         public const string GetAll = Base + "/posts";

@@ -8,13 +8,13 @@ namespace ProductCatalog.Services
 {
     public interface IProductService
     {
-        List<Product> GetPosts();
+        List<Product> GetProducts();
 
-        Product GetPostById(Guid postId);
+        Product GetProductById(Guid postId);
 
         Product GetProductByCode(string code);
 
-        bool UpdatePost(Product postToUpdate);
-        bool DeletePost(Guid postId);
+        bool UpdateProduct(Product postToUpdate);
+        bool DeleteProduct(Guid postId);
     }
 }
