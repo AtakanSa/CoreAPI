@@ -24,6 +24,7 @@
     ".NETCoreApp,Version=v3.0": {
       "ProductCatalog/1.0.0": {
         "dependencies": {
+          "CommonServiceLocator": "2.0.5",
           "DocumentFormat.OpenXml": "2.10.0",
           "FluentValidation.AspNetCore": "8.6.1",
           "Swashbuckle.AspNetCore": "5.0.0",
@@ -316,6 +317,17 @@
         },
         "compile": {
           "ProductCatalog.dll": {}
+        }
+      },
+      "CommonServiceLocator/2.0.5": {
+        "runtime": {
+          "lib/netcoreapp3.0/CommonServiceLocator.dll": {
+            "assemblyVersion": "2.0.5.0",
+            "fileVersion": "2.0.5.0"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp3.0/CommonServiceLocator.dll": {}
         }
       },
       "DocumentFormat.OpenXml/2.10.0": {
@@ -2155,6 +2167,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "CommonServiceLocator/2.0.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Md2q9f6hAuUAm6IWTybQbYvxhDAs2dqmsudVDghpg0Q+C0M2KkmiTDjeGx1PsYhnZPvp+hy1Cx99v0VPW9W6/g==",
+      "path": "commonservicelocator/2.0.5",
+      "hashPath": "commonservicelocator.2.0.5.nupkg.sha512"
     },
     "DocumentFormat.OpenXml/2.10.0": {
       "type": "package",

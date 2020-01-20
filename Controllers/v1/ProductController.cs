@@ -70,13 +70,16 @@ namespace ProductCatalog.Controllers.v1
         [HttpPost(ApiRoutes.Posts.Create)]
         public IActionResult Create([FromBody] CreateProductRequest postRequest)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 string messages = string.Join("; ", ModelState.Values
                                         .SelectMany(x => x.Errors)
                                         .Select(x => x.ErrorMessage));
                 return BadRequest(new { error = messages });
             }
+            
+           
+
 
             var codeUniqness = _postService.GetProductByCode(postRequest.Code);
 
@@ -95,6 +98,8 @@ namespace ProductCatalog.Controllers.v1
             {
                 pictureUrl = postRequest.Picture;
             }
+            if (!Uri.IsWellFormedUriString(postRequest.Picture, UriKind.RelativeOrAbsolute))
+                return BadRequest(new { error = "Picture URL is not well Formatted !" });
 
             var product = new Product
             {
@@ -106,8 +111,6 @@ namespace ProductCatalog.Controllers.v1
                 Id = Guid.NewGuid()
             };
 
-
-           
 
             _postService.GetPosts().Add(product);
 

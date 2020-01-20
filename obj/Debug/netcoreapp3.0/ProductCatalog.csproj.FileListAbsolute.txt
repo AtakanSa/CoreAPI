@@ -25,5 +25,6 @@ C:\Users\asari\source\repos\ProductCatalog\bin\Debug\netcoreapp3.0\System.IO.Pac
 C:\Users\asari\source\repos\ProductCatalog\bin\Debug\netcoreapp3.0\FluentValidation.dll
 C:\Users\asari\source\repos\ProductCatalog\bin\Debug\netcoreapp3.0\FluentValidation.AspNetCore.dll
 C:\Users\asari\source\repos\ProductCatalog\bin\Debug\netcoreapp3.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Users\asari\source\repos\ProductCatalog\bin\Debug\netcoreapp3.0\CommonServiceLocator.dll
 C:\Users\asari\source\repos\ProductCatalog\obj\Debug\netcoreapp3.0\ProductCatalog.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\asari\source\repos\ProductCatalog\obj\Debug\netcoreapp3.0\ProductCatalog.MvcApplicationPartsAssemblyInfo.cache
