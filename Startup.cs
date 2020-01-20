@@ -32,7 +32,7 @@ namespace ProductCatalog
                     .AddFluentValidation(mvcConfiguration => mvcConfiguration.RegisterValidatorsFromAssemblyContaining<Startup>());
 
             services.AddControllersWithViews();
-            services.AddSingleton<IPostService, PostService>();
+            services.AddSingleton<IProductService, ProductService>();
             services.AddSwaggerGen(x =>
            {
                x.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Product Catalog API's", Version = "v1" });//risky

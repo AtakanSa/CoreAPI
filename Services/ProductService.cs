@@ -7,16 +7,16 @@ using ProductCatalog.Services;
 
 namespace ProductCatalog.Service
 {
-    public class PostService : IPostService
+    public class ProductService : IProductService
     {
-        private readonly List<Post> _posts;
+        private readonly List<Product> _posts;
 
-        public PostService()
+        public ProductService()
         {
-            _posts = new List<Post>();
+            _posts = new List<Product>();
             for (int i = 0; i < 5; i++)
             {
-                _posts.Add(new Post
+                _posts.Add(new Product
                 {
                     Id = Guid.NewGuid(),
                     Name = $"Post Name {i}"
@@ -26,18 +26,18 @@ namespace ProductCatalog.Service
 
             }
         }
-        public List<Post> GetPosts()
+        public List<Product> GetPosts()
         {
             return _posts;
 
         }
-        public Post GetPostById(Guid postId)
+        public Product GetPostById(Guid postId)
         {
             
             return _posts.SingleOrDefault(x => x.Id == postId);
         }
 
-        public bool UpdatePost(Post postToUpdate)
+        public bool UpdatePost(Product postToUpdate)
         {
             var exists = GetPostById(postToUpdate.Id) != null;
 
@@ -58,6 +58,11 @@ namespace ProductCatalog.Service
 
             _posts.Remove(post);
             return true;
+        }
+
+        public Product GetProductByCode(string code)
+        {
+            return _posts.SingleOrDefault(x => x.Code == code);
         }
     }
 }

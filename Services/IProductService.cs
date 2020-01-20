@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace ProductCatalog.Services
 {
-    public interface IPostService
+    public interface IProductService
     {
-        List<Post> GetPosts();
+        List<Product> GetPosts();
 
-        Post GetPostById(Guid postId);
+        Product GetPostById(Guid postId);
 
-        bool UpdatePost(Post postToUpdate);
+        Product GetProductByCode(string code);
+
+        bool UpdatePost(Product postToUpdate);
         bool DeletePost(Guid postId);
     }
 }
