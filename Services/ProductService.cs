@@ -19,12 +19,13 @@ namespace ProductCatalog.Service
                 _posts.Add(new Product
                 {
                     Id = Guid.NewGuid(),
-                    Name = $"Post Name {i}"
+                    Name = $"Product Name {i}"
                 });
 
 
 
             }
+
         }
         public List<Product> GetProducts()
         {
@@ -33,8 +34,19 @@ namespace ProductCatalog.Service
         }
         public Product GetProductById(Guid postId)
         {
-            
+
             return _posts.SingleOrDefault(x => x.Id == postId);
+        }
+
+        public List<Product> GetProductByName(String productName)
+        {
+            List<Product> _products = new List<Product>();
+            foreach (Product item in _posts)
+            {
+                if (item.Name.Equals(productName))
+                    _products.Add(item);
+            }
+            return _products;
         }
 
         public bool UpdateProduct(Product postToUpdate)

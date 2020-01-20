@@ -13,7 +13,7 @@ namespace ProductCatalog.Services
         Product GetProductById(Guid postId);
 
         Product GetProductByCode(string code);
-
+        List<Product> GetProductByName(String productName);
         bool UpdateProduct(Product postToUpdate);
         bool DeleteProduct(Guid postId);
     }

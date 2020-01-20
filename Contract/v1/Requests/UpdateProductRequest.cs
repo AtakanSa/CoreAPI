@@ -7,6 +7,11 @@ namespace ProductCatalog.Contract.v1.Requests
 {
     public class UpdateProductRequest
     {
+        public Guid Id { get; set; }
+        public string Code { get; set; }
+        public string Picture { get; set; }
+        public decimal Price { get; set; }
+        public DateTime UpdatedAt { get; set; }
         public string Name { get; set; }
     }
 }

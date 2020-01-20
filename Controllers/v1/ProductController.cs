@@ -26,6 +26,13 @@ namespace ProductCatalog.Controllers.v1
         {
             return Ok(_postService.GetProducts());
         }
+
+        [HttpGet(ApiRoutes.Posts.Search)]
+        public IActionResult GetProductByName([FromRoute]String productName)
+        {
+            return Ok(_postService.GetProductByName(productName));
+        }
+
         [HttpDelete(ApiRoutes.Posts.Delete)]
         public IActionResult Delete([FromRoute]Guid postId)
         {
@@ -51,9 +58,38 @@ namespace ProductCatalog.Controllers.v1
         [HttpPut(ApiRoutes.Posts.Update)]
         public IActionResult Update([FromRoute]Guid postId, [FromBody] UpdateProductRequest request)
         {
+            if (!ModelState.IsValid)
+            {
+                string messages = string.Join("; ", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage));
+                return BadRequest(new { error = messages });
+            }
+            var codeUniqness = _postService.GetProductByCode(request.Code);
+
+            if (codeUniqness != null)
+                return BadRequest(new { error = "Code must be unique !" });
+
+            string pictureUrl;
+            if (string.IsNullOrEmpty(request.Picture))
+            {
+                pictureUrl = "";
+            }
+            else
+            {
+
+                if (!Uri.IsWellFormedUriString(request.Picture, UriKind.RelativeOrAbsolute))
+                    return BadRequest(new { error = "Picture URL is not well Formatted !" });
+                pictureUrl = request.Picture;
+            }
+
             var post = new Product {
                 Id = postId,
-                Name = request.Name
+                Picture = pictureUrl,
+                Name = request.Name,
+                Price = request.Price,
+                Code = request.Code,
+                UpdatedAt = request.UpdatedAt
             };
 
             var updated = _postService.UpdateProduct(post);
@@ -78,8 +114,6 @@ namespace ProductCatalog.Controllers.v1
                 return BadRequest(new { error = messages });
             }
             
-           
-
 
             var codeUniqness = _postService.GetProductByCode(postRequest.Code);
 
@@ -96,9 +130,10 @@ namespace ProductCatalog.Controllers.v1
             }
             else
             {
-                pictureUrl = postRequest.Picture;
+
                 if (!Uri.IsWellFormedUriString(postRequest.Picture, UriKind.RelativeOrAbsolute))
                     return BadRequest(new { error = "Picture URL is not well Formatted !" });
+                pictureUrl = postRequest.Picture;
             }
             
 
@@ -106,7 +141,7 @@ namespace ProductCatalog.Controllers.v1
             {
                 Name = postRequest.Name,
                 Price = postRequest.Price,
-                UpdatedAt = DateTime.UtcNow,
+                UpdatedAt = postRequest.UpdatedAt,
                 Code = postRequest.Code,
                 Picture = pictureUrl,
                 Id = Guid.NewGuid()
