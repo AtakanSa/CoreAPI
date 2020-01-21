@@ -9,5 +9,5 @@ namespace ProductCatalog.Services
     {
         Task<String> StoreFile(string containerName, string filename, byte[] file, string path = "", string contentType = "");
         Task DeleteFile(string containerName, string filename, string path = "");
-    }
+      }
 }

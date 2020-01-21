@@ -72,10 +72,20 @@ namespace ProductCatalog.Controllers.v1
         [HttpDelete(ApiRoutes.Posts.Delete)]
         public IActionResult Delete([FromRoute]Guid postId)
         {
+            Product oldProduct = _postService.GetProductById(postId);
             var deleted = _postService.DeleteProduct(postId);
-
+            
             if (deleted)
+            {
+                
+                var imageName = oldProduct.Code + ".jpg";
+                var storagePath = "/";
+
+
+                _storageProvider.DeleteFile("products", imageName, storagePath);
                 return NoContent();
+            }
+
 
             return NotFound();
         }
@@ -123,7 +133,7 @@ namespace ProductCatalog.Controllers.v1
         /// <response code = "404">Not Found</response>
         /// <returns></returns>
         [HttpPut(ApiRoutes.Posts.Update)]
-        public IActionResult Update([FromRoute]Guid postId, [FromBody] UpdateProductRequest request)
+        public async Task<IActionResult> UpdateAsync([FromRoute]Guid postId, [FromBody] UpdateProductRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -137,6 +147,9 @@ namespace ProductCatalog.Controllers.v1
             if (codeUniqness != null)
                 return BadRequest(new { error = "Code must be unique !" });
 
+            Product oldProduct = _postService.GetProductById(postId);
+
+
             string pictureUrl;
             if (string.IsNullOrEmpty(request.Picture))
             {
@@ -147,7 +160,21 @@ namespace ProductCatalog.Controllers.v1
 
                 if (!Uri.IsWellFormedUriString(request.Picture, UriKind.RelativeOrAbsolute))
                     return BadRequest(new { error = "Picture URL is not well Formatted !" });
-                pictureUrl = request.Picture;
+
+                byte[] imageBytes;
+                using (var webClient = new WebClient())
+                {
+                    imageBytes = webClient.DownloadData(request.Picture);
+                }
+                var fileName = oldProduct.Code +".jpg";
+                var storagePath = "/";
+                pictureUrl = await _storageProvider.StoreFile("products", fileName, imageBytes, storagePath, "application/jpg");
+                var oldImageName = oldProduct.Code + ".jpg";
+                var oldstoragePath = "/";
+
+
+                await _storageProvider.DeleteFile("products", oldImageName, oldstoragePath);
+
             }
 
             var post = new Product
@@ -219,7 +246,7 @@ namespace ProductCatalog.Controllers.v1
                 {
                     imageBytes = webClient.DownloadData(postRequest.Picture);
                 }
-                var fileName = $"{postRequest.Name}-{Guid.NewGuid()}.jpg";
+                var fileName = postRequest.Code + ".jpg";
                 var storagePath = "/";
 
                 

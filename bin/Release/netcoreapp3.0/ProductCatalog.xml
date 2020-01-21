@@ -59,7 +59,7 @@
             <response code = "404">Not Found</response>
             <returns></returns>
         </member>
-        <member name="M:ProductCatalog.Controllers.v1.ProductController.Update(System.Guid,ProductCatalog.Contract.v1.Requests.UpdateProductRequest)">
+        <member name="M:ProductCatalog.Controllers.v1.ProductController.UpdateAsync(System.Guid,ProductCatalog.Contract.v1.Requests.UpdateProductRequest)">
             <summary>
             Update an item using item's Id
             </summary>
