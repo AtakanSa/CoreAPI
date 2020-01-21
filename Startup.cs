@@ -42,6 +42,12 @@ namespace ProductCatalog
                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                x.IncludeXmlComments(xmlPath);
            });
+            //update
+            services.AddScoped<IAzureStorageProvider>(factory => new AzureStorageProvider(
+               "productsstorages",
+               "oA32m8qKneGckSiGPp82Zgljz9X2HWmdbb9pNL2Z5zj2PBp8EdS9hGSLjq8MKwj3k1Mw5bSq1Rtnuea+QTHI6g=="
+            ));
+
 
         }
 

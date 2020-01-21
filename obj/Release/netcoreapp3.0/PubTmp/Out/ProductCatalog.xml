@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ProductCatalog</name>
+    </assembly>
+    <members>
+        <member name="M:ProductCatalog.Controllers.v1.ProductController.GetAll">
+            <summary>
+             Gets All Product Items in list
+            </summary>
+            <response code = "200">Succesfully fetched items</response>
+            <returns></returns>
+        </member>
+        <member name="M:ProductCatalog.Controllers.v1.ProductController.GetProductByName(System.String)">
+            <summary>
+             Search Product by Name
+            </summary>
+            <remarks>
+            Sample Request : 
+            
+                POST /api/v1/products/search/{productName}
+                {
+                    "productName" : "name"
+                }
+            </remarks>
+            <response code = "200">Returns Item Object</response>
+            <response code = "404">Not Found</response>
+            <returns></returns>
+        </member>
+        <member name="M:ProductCatalog.Controllers.v1.ProductController.Delete(System.Guid)">
+            <summary>
+             Deletes Product Item From List
+            </summary>
+            <remarks>
+            Sample Request : 
+            
+                Delete /api/v1/products/{productId}
+                {
+                    "productId" : "Id"
+                }
+            </remarks>
+            <response code = "204">Deleted Item</response>
+            <response code = "404">Not Found</response>
+            <returns></returns>
+        </member>
+        <member name="M:ProductCatalog.Controllers.v1.ProductController.Get(System.Guid)">
+            <summary>
+             Get Product Details by Id
+            </summary>
+            <remarks>
+            Sample Request : 
+            
+                GET /api/v1/products/{productId}
+                {
+                    "productId" : "Id"
+                }
+            </remarks>
+            <response code = "200">Success</response>
+            <response code = "404">Not Found</response>
+            <returns></returns>
+        </member>
+        <member name="M:ProductCatalog.Controllers.v1.ProductController.Update(System.Guid,ProductCatalog.Contract.v1.Requests.UpdateProductRequest)">
+            <summary>
+            Update an item using item's Id
+            </summary>
+            <remarks>
+            Sample Request : 
+            
+                PUT /api/v1/products/{productId}
+                {
+                    "Name" : "productName",
+                    "Price" : 100,
+                    "updatedAt" : "2020-01-21T07:54:54.845Z",
+                    "picture" : "pictureUrl" ,
+                    "code" : someCode
+                }
+            </remarks>
+            <response code = "200">Success</response>
+            <response code = "404">Not Found</response>
+            <returns></returns>
+        </member>
+        <member name="M:ProductCatalog.Controllers.v1.ProductController.Create(ProductCatalog.Contract.v1.Requests.CreateProductRequest)">
+            <summary>
+             Create new Product Item 
+            </summary>
+            <remarks>
+            Sample Request : 
+            
+                POST /api/v1/products
+                {
+                    "Name" : "productName",
+                    "Price" : 200,
+                    "updatedAt" : "2020-01-21T07:54:54.845Z",
+                    "picture" : "pictureUrl" ,
+                    "code" : someCode
+                }
+            </remarks>
+            <response code = "200">Success</response>
+            <response code = "404">Not Found</response>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

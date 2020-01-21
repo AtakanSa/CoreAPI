@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\asari\\source\\repos\\ProductCatalog\\ProductCatalog.csproj": {}
+    "C:\\Users\\asari\\Desktop\\DONTNET\\ProductCatalog\\ProductCatalog.csproj": {}
   },
   "projects": {
-    "C:\\Users\\asari\\source\\repos\\ProductCatalog\\ProductCatalog.csproj": {
+    "C:\\Users\\asari\\Desktop\\DONTNET\\ProductCatalog\\ProductCatalog.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\asari\\source\\repos\\ProductCatalog\\ProductCatalog.csproj",
+        "projectUniqueName": "C:\\Users\\asari\\Desktop\\DONTNET\\ProductCatalog\\ProductCatalog.csproj",
         "projectName": "ProductCatalog",
-        "projectPath": "C:\\Users\\asari\\source\\repos\\ProductCatalog\\ProductCatalog.csproj",
+        "projectPath": "C:\\Users\\asari\\Desktop\\DONTNET\\ProductCatalog\\ProductCatalog.csproj",
         "packagesPath": "C:\\Users\\asari\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\asari\\source\\repos\\ProductCatalog\\obj\\",
+        "outputPath": "C:\\Users\\asari\\Desktop\\DONTNET\\ProductCatalog\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -62,6 +62,10 @@
             "System.Runtime": {
               "target": "Package",
               "version": "[4.3.1, )"
+            },
+            "WindowsAzure.Storage": {
+              "target": "Package",
+              "version": "[9.3.3, )"
             }
           },
           "imports": [

@@ -7,6 +7,7 @@ using ProductCatalog.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using static ProductCatalog.Contract.v1.ApiRoutes;
 
@@ -16,9 +17,11 @@ namespace ProductCatalog.Controllers.v1
     {
 
         private readonly IProductService _postService;
-        public ProductController(IProductService postService)
+        private readonly IAzureStorageProvider _storageProvider;
+        public ProductController(IProductService postService, IAzureStorageProvider storageProvider)
         {
             _postService = postService;
+            _storageProvider = storageProvider;
         }
 
         /// <summary>
@@ -185,7 +188,7 @@ namespace ProductCatalog.Controllers.v1
         /// <response code = "404">Not Found</response>
         /// <returns></returns>
         [HttpPost(ApiRoutes.Posts.Create)]
-        public IActionResult Create([FromBody] CreateProductRequest postRequest)
+        public async Task<IActionResult> CreateAsync([FromBody] CreateProductRequest postRequest)
         {
             if (!ModelState.IsValid)
             {
@@ -211,7 +214,16 @@ namespace ProductCatalog.Controllers.v1
 
                 if (!Uri.IsWellFormedUriString(postRequest.Picture, UriKind.RelativeOrAbsolute))
                     return BadRequest(new { error = "Picture URL is not well Formatted !" });
-                pictureUrl = postRequest.Picture;
+                byte[] imageBytes;
+                using (var webClient = new WebClient())
+                {
+                    imageBytes = webClient.DownloadData(postRequest.Picture);
+                }
+                var fileName = $"{postRequest.Name}-{Guid.NewGuid()}.jpg";
+                var storagePath = "/";
+
+                
+                pictureUrl = await _storageProvider.StoreFile("products", fileName, imageBytes, storagePath, "application/jpg");
             }
             
 
