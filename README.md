@@ -1,7 +1,7 @@
 # Product Catalog REST API
-> A soloution for CRUD jobs of Product Catalog List
+> An API solution developped with .Net Core 3.0 for GetAll, Get, Create, Update, Delete and Search functions
 
-One to two paragraph statement about your product and what it does.
+Restfull API for Product Catalog. You can manage all of products via this solution
 
 ![](api.jpg)
 
