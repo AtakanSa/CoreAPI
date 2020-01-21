@@ -25,3 +25,5 @@ C:\Users\asari\source\repos\ProductCatalog\obj\Release\netcoreapp3.0\ProductCata
 C:\Users\asari\source\repos\ProductCatalog\obj\Release\netcoreapp3.0\ProductCatalog.csproj.CopyComplete
 C:\Users\asari\source\repos\ProductCatalog\obj\Release\netcoreapp3.0\ProductCatalog.dll
 C:\Users\asari\source\repos\ProductCatalog\obj\Release\netcoreapp3.0\ProductCatalog.pdb
+C:\Users\asari\source\repos\ProductCatalog\bin\Release\netcoreapp3.0\ProductCatalog.xml
+C:\Users\asari\source\repos\ProductCatalog\obj\Release\netcoreapp3.0\ProductCatalog.xml

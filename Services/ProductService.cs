@@ -13,7 +13,10 @@ namespace ProductCatalog.Service
 
         public ProductService()
         {
+            // Products Lists
             _posts = new List<Product>();
+
+            //Manually creating items for initialization
             for (int i = 0; i < 5; i++)
             {
                 _posts.Add(new Product
@@ -21,10 +24,16 @@ namespace ProductCatalog.Service
                     Id = Guid.NewGuid(),
                     Name = $"Product Name {i}"
                 });
-
-
-
             }
+            // Static Item for test
+            Guid staticId = new Guid("00000000-0000-0000-0000-000000000000");
+             _posts.Add(new Product
+            {
+                Id = staticId,
+                Name = "TestProduct",
+                Price =  100,
+                UpdatedAt = DateTime.UtcNow.AddDays(1)
+            });
 
         }
         public List<Product> GetProducts()

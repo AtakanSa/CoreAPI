@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29509.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductCatalog", "ProductCatalog.csproj", "{740DCC2C-F0B6-45C2-A609-65149B59EE25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xUnitTest", "..\xUnitTest\xUnitTest.csproj", "{37014B33-C209-4936-B2F4-F962C5166407}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xUnitTest", "..\xUnitTest\xUnitTest.csproj", "{37014B33-C209-4936-B2F4-F962C5166407}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
@@ -36,7 +38,11 @@ namespace ProductCatalog
             services.AddSwaggerGen(x =>
            {
                x.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Product Catalog API's", Version = "v1" });//risky
+               var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+               var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+               x.IncludeXmlComments(xmlPath);
            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
