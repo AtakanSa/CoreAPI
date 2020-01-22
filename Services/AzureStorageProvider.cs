@@ -16,6 +16,8 @@ namespace ProductCatalog.Services
 
         public AzureStorageProvider(string account, string key)
         {
+            //Initialize storage account in here
+            //account and key should be stored at KeyVault its in progress
             var storageAccount = new CloudStorageAccount(new StorageCredentials("productsstorages", "oA32m8qKneGckSiGPp82Zgljz9X2HWmdbb9pNL2Z5zj2PBp8EdS9hGSLjq8MKwj3k1Mw5bSq1Rtnuea+QTHI6g=="), true);
             _blobClient = storageAccount.CreateCloudBlobClient();
 
@@ -23,8 +25,10 @@ namespace ProductCatalog.Services
 
         public async Task DeleteFile(string containerName, string filename, string path = "")
         {
+            //find container
             var container = _blobClient.GetContainerReference("products");
 
+            //delete file
             _blob = container.GetBlockBlobReference(Path.Combine(path, filename));
             await _blob.DeleteAsync();
         }

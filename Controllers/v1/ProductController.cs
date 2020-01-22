@@ -18,6 +18,7 @@ namespace ProductCatalog.Controllers.v1
 
         private readonly IProductService _postService;
         private readonly IAzureStorageProvider _storageProvider;
+
         public ProductController(IProductService postService, IAzureStorageProvider storageProvider)
         {
             _postService = postService;
@@ -72,6 +73,7 @@ namespace ProductCatalog.Controllers.v1
         [HttpDelete(ApiRoutes.Posts.Delete)]
         public IActionResult Delete([FromRoute]Guid postId)
         {
+            //old product attiributes needs for delete from storage
             Product oldProduct = _postService.GetProductById(postId);
             var deleted = _postService.DeleteProduct(postId);
             
@@ -135,6 +137,10 @@ namespace ProductCatalog.Controllers.v1
         [HttpPut(ApiRoutes.Posts.Update)]
         public async Task<IActionResult> UpdateAsync([FromRoute]Guid postId, [FromBody] UpdateProductRequest request)
         {
+            //needs for storage update
+            //old product attiributes needs for update same product without code error
+            Product oldProduct = _postService.GetProductById(postId);
+
             if (!ModelState.IsValid)
             {
                 string messages = string.Join("; ", ModelState.Values
@@ -142,41 +148,47 @@ namespace ProductCatalog.Controllers.v1
                                         .Select(x => x.ErrorMessage));
                 return BadRequest(new { error = messages });
             }
-            var codeUniqness = _postService.GetProductByCode(request.Code);
 
-            if (codeUniqness != null)
-                return BadRequest(new { error = "Code must be unique !" });
-
-            Product oldProduct = _postService.GetProductById(postId);
-
-
-            string pictureUrl;
-            if (string.IsNullOrEmpty(request.Picture))
+            //checks for code uniqness
+            if (!request.Code.Equals(oldProduct.Code))
             {
-                pictureUrl = "";
+                var codeUniqness = _postService.GetProductByCode(request.Code);
+
+                if (codeUniqness != null)
+                    return BadRequest(new { error = "Code must be unique !" });
+
             }
-            else
-            {
+          
 
-                if (!Uri.IsWellFormedUriString(request.Picture, UriKind.RelativeOrAbsolute))
+            //initiliaze like empty string because PictureUrl is optional and sender may not send this attiribute
+            string pictureUrl="";
+            if (!string.IsNullOrEmpty(request.Picture))
+            {
+                // if (!Uri.IsWellFormedUriString(request.Picture, UriKind.RelativeOrAbsolute))
+                //   return BadRequest(new { error = "Picture URL is not well Formatted !" });
+
+               if(!UrlValid(request.Picture))
                     return BadRequest(new { error = "Picture URL is not well Formatted !" });
 
+
+                //fetchs image in byteArray and sends to blob storage
+                //First creates new one and then delete old one
                 byte[] imageBytes;
                 using (var webClient = new WebClient())
                 {
                     imageBytes = webClient.DownloadData(request.Picture);
                 }
-                var fileName = oldProduct.Code +".jpg";
+                var fileName = oldProduct.Code + ".jpg";
                 var storagePath = "/";
                 pictureUrl = await _storageProvider.StoreFile("products", fileName, imageBytes, storagePath, "application/jpg");
                 var oldImageName = oldProduct.Code + ".jpg";
                 var oldstoragePath = "/";
 
-
+                //deletes from storage
                 await _storageProvider.DeleteFile("products", oldImageName, oldstoragePath);
-
             }
-
+           
+            //new product assigment
             var post = new Product
             {
                 Id = postId,
@@ -224,23 +236,20 @@ namespace ProductCatalog.Controllers.v1
                                         .Select(x => x.ErrorMessage));
                 return BadRequest(new { error = messages });
             }
-            
 
+            //checks for code uniqueness
             var codeUniqness = _postService.GetProductByCode(postRequest.Code);
 
             if (codeUniqness != null)
                 return BadRequest(new { error = "Code must be unique !" });
 
-            string pictureUrl;
-            if (string.IsNullOrEmpty(postRequest.Picture))
+            //initiliaze like empty string because PictureUrl is optional and sender may not send this attiribute
+            string pictureUrl = ""; ;
+            if (!string.IsNullOrEmpty(postRequest.Picture))
             {
-                pictureUrl = "";
-            }
-            else
-            {
-
-                if (!Uri.IsWellFormedUriString(postRequest.Picture, UriKind.RelativeOrAbsolute))
+                if (!UrlValid(postRequest.Picture))
                     return BadRequest(new { error = "Picture URL is not well Formatted !" });
+                //fetchs image in byteArray and sends to blob storage
                 byte[] imageBytes;
                 using (var webClient = new WebClient())
                 {
@@ -249,10 +258,11 @@ namespace ProductCatalog.Controllers.v1
                 var fileName = postRequest.Code + ".jpg";
                 var storagePath = "/";
 
-                
+                //uplaod file to storage
                 pictureUrl = await _storageProvider.StoreFile("products", fileName, imageBytes, storagePath, "application/jpg");
             }
-            
+          
+
 
             var product = new Product
             {
@@ -264,14 +274,14 @@ namespace ProductCatalog.Controllers.v1
                 Id = Guid.NewGuid()
             };
 
-
+            //updating our list of products
             _postService.GetProducts().Add(product);
 
             var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
             var locationUrl = baseUrl + "/" + ApiRoutes.Posts.Get.Replace("{postId}", product.Id.ToString());
 
-            var response = new ProductResponse 
-            { 
+            var response = new ProductResponse
+            {
                 Id = product.Id,
                 Name = product.Name,
                 Price = product.Price,
@@ -283,6 +293,15 @@ namespace ProductCatalog.Controllers.v1
 
 
 
+        }
+        public bool UrlValid(string url)
+        {
+            Uri uriResult;
+            bool tryCreateResult = Uri.TryCreate(url, UriKind.Absolute, out uriResult);
+            if (tryCreateResult == true && uriResult != null)
+                return true;
+            else
+                return false;
         }
     }
 }

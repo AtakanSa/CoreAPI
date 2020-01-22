@@ -38,4 +38,33 @@ namespace ProductCatalog.Validators
 
         }
     }
+    public class UpdateProductValidator : AbstractValidator<UpdateProductRequest>
+    {
+
+        public UpdateProductValidator()
+        {
+
+
+
+            RuleFor(x => x.Code)
+                 .NotEmpty().WithMessage("Code must not be empty !")
+                 .Matches("^[a-zA-Z0-9]*$").WithMessage("Code can contains only alpha-numeric characters !");
+
+            RuleFor(x => x.UpdatedAt)
+                .NotEmpty().WithMessage("Update Time must not be empty !")
+                .GreaterThanOrEqualTo(r => DateTime.Now).WithMessage("Date To must be after Date From");
+
+            RuleFor(x => x.Name)
+                .NotEmpty().WithMessage("Name To must be after Date From");
+
+            RuleFor(x => x.Price)
+                .GreaterThan(0)
+                .LessThan(1000)
+                .NotEmpty()
+                .WithMessage("Price must be correct format");
+
+
+
+        }
+    }
 }

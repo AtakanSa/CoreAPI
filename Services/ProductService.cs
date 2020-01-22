@@ -25,13 +25,13 @@ namespace ProductCatalog.Service
                     Name = $"Product Name {i}"
                 });
             }
-            // Static Item for test
+            // Static Item for project can be tested
             Guid staticId = new Guid("00000000-0000-0000-0000-000000000000");
-             _posts.Add(new Product
+            _posts.Add(new Product
             {
                 Id = staticId,
                 Name = "TestProduct",
-                Price =  100,
+                Price = 100,
                 UpdatedAt = DateTime.UtcNow.AddDays(1)
             });
 
@@ -49,6 +49,7 @@ namespace ProductCatalog.Service
 
         public List<Product> GetProductByName(String productName)
         {
+            //For Product Search
             List<Product> _products = new List<Product>();
             foreach (Product item in _posts)
             {

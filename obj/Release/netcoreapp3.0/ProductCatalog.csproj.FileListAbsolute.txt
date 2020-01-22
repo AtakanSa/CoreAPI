@@ -47,7 +47,6 @@ C:\Users\asari\Desktop\DONTNET\ProductCatalog\bin\Release\netcoreapp3.0\Swashbuc
 C:\Users\asari\Desktop\DONTNET\ProductCatalog\bin\Release\netcoreapp3.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\asari\Desktop\DONTNET\ProductCatalog\bin\Release\netcoreapp3.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\asari\Desktop\DONTNET\ProductCatalog\bin\Release\netcoreapp3.0\System.IO.Packaging.dll
-C:\Users\asari\Desktop\DONTNET\ProductCatalog\obj\Release\netcoreapp3.0\ProductCatalog.csprojAssemblyReference.cache
 C:\Users\asari\Desktop\DONTNET\ProductCatalog\obj\Release\netcoreapp3.0\staticwebassets\ProductCatalog.StaticWebAssets.Manifest.cache
 C:\Users\asari\Desktop\DONTNET\ProductCatalog\obj\Release\netcoreapp3.0\staticwebassets\ProductCatalog.StaticWebAssets.xml
 C:\Users\asari\Desktop\DONTNET\ProductCatalog\obj\Release\netcoreapp3.0\ProductCatalog.csproj.CopyComplete
@@ -58,3 +57,4 @@ C:\Users\asari\Desktop\DONTNET\ProductCatalog\bin\Release\netcoreapp3.0\Newtonso
 C:\Users\asari\Desktop\DONTNET\ProductCatalog\bin\Release\netcoreapp3.0\Microsoft.WindowsAzure.Storage.dll
 C:\Users\asari\Desktop\DONTNET\ProductCatalog\obj\Release\netcoreapp3.0\ProductCatalog.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\asari\Desktop\DONTNET\ProductCatalog\obj\Release\netcoreapp3.0\ProductCatalog.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\asari\Desktop\DONTNET\ProductCatalog\obj\Release\netcoreapp3.0\ProductCatalog.csprojAssemblyReference.cache

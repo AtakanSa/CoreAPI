@@ -22,7 +22,7 @@ namespace ProductCatalog.Contract.v1
         public const string Update = Base + "/products/{postId}";
         public const string Delete = Base + "/products/{postId}";
         public const string Create = Base + "/products";
-            // public static readonly string Get = "api/v1/posts/{postId}";
+          
         }
     }
 }
