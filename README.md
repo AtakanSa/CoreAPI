@@ -1,7 +1,9 @@
 # Product Catalog REST API
-> An API solution developped with .Net Core 3.0 for GetAll, Get, Create, Update, Delete and Search functions
+> Restfull API for Product Catalog. You can manage your stock management via this solution.
 
-Restfull API for Product Catalog. You can manage all of products via this solution
+An API solution developed with .Net Core 3.0 for GetAll, Get, Create, Update, Delete and Search functions
+
+
 
 ![](api.jpg)
 
@@ -26,7 +28,7 @@ Restfull API for Product Catalog. You can manage all of products via this soluti
     * FIX: Validation Errors
 * 0.1.0
     * The first proper release
-    * ADD : Service's and Validators for endpoints
+    * ADD : Services and Validators for endpoints
 * 0.0.1
     * Work in progress
 
